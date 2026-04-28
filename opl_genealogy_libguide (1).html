@@ -1,0 +1,744 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Genealogy & Local History Research | Opelika Public Library</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Source+Sans+3:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --red: #e4002b;
+      --near-black: #2b2926;
+      --teal: #279989;
+      --dark-gray: #63666a;
+      --dark-teal: #30766c;
+      --medium-teal: #7abdb4;
+      --light-teal: #a3cbc5;
+      --burgundy: #a61e38;
+      --rose: #e43d5d;
+      --salmon: #f86c87;
+      --light-gray: #b4b6b8;
+      --near-white: #f1f1f1;
+      --pale-blue-gray: #e1e6eb;
+      --medium-gray: #737476;
+      --dark-charcoal: #3d3c3a;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Source Sans 3', sans-serif;
+      font-weight: 400;
+      background: var(--near-white);
+      color: var(--near-black);
+      font-size: 16px;
+      line-height: 1.7;
+    }
+
+    /* ── HEADER ── */
+    .site-header {
+      background: var(--near-black);
+      padding: 0 2rem;
+      display: flex;
+      align-items: stretch;
+      border-bottom: 4px solid var(--red);
+    }
+    .header-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1.25rem 0;
+      gap: 1rem;
+    }
+    .header-logo {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      text-decoration: none;
+    }
+    .logo-mark {
+      width: 44px;
+      height: 44px;
+      background: var(--red);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Playfair Display', serif;
+      font-weight: 700;
+      color: white;
+      font-size: 1.1rem;
+      letter-spacing: -0.02em;
+      flex-shrink: 0;
+    }
+    .logo-text {
+      display: flex;
+      flex-direction: column;
+    }
+    .logo-library {
+      font-family: 'Playfair Display', serif;
+      font-weight: 600;
+      color: white;
+      font-size: 1rem;
+      line-height: 1.2;
+      letter-spacing: 0.01em;
+    }
+    .logo-city {
+      font-family: 'Source Sans 3', sans-serif;
+      font-weight: 300;
+      color: var(--light-teal);
+      font-size: 0.75rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+    .header-back {
+      font-family: 'Source Sans 3', sans-serif;
+      font-size: 0.8rem;
+      color: var(--light-gray);
+      text-decoration: none;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      transition: color 0.2s;
+    }
+    .header-back:hover { color: var(--medium-teal); }
+
+    /* ── GUIDE HERO ── */
+    .guide-hero {
+      background: var(--dark-charcoal);
+      padding: 2.5rem 2rem 0;
+      position: relative;
+      overflow: hidden;
+    }
+    .guide-hero::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: 
+        repeating-linear-gradient(
+          90deg,
+          transparent,
+          transparent 60px,
+          rgba(255,255,255,0.015) 60px,
+          rgba(255,255,255,0.015) 61px
+        );
+      pointer-events: none;
+    }
+    .hero-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      position: relative;
+    }
+    .guide-label {
+      font-size: 0.72rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--medium-teal);
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+    }
+    .guide-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(1.6rem, 3vw, 2.4rem);
+      font-weight: 700;
+      color: white;
+      line-height: 1.2;
+      margin-bottom: 0.75rem;
+    }
+    .guide-subtitle {
+      font-size: 0.95rem;
+      color: var(--light-gray);
+      font-weight: 300;
+      max-width: 600px;
+      margin-bottom: 2rem;
+    }
+
+    /* ── TAB NAV ── */
+    .tab-nav {
+      display: flex;
+      gap: 0;
+      flex-wrap: wrap;
+      margin-top: 0.5rem;
+    }
+    .tab-btn {
+      font-family: 'Source Sans 3', sans-serif;
+      font-size: 0.85rem;
+      font-weight: 500;
+      letter-spacing: 0.02em;
+      padding: 0.75rem 1.35rem;
+      border: none;
+      background: transparent;
+      color: var(--light-gray);
+      cursor: pointer;
+      border-bottom: 3px solid transparent;
+      transition: color 0.2s, border-color 0.2s, background 0.2s;
+      white-space: nowrap;
+    }
+    .tab-btn:hover {
+      color: white;
+      background: rgba(255,255,255,0.05);
+    }
+    .tab-btn.active {
+      color: white;
+      border-bottom-color: var(--red);
+      background: rgba(255,255,255,0.07);
+    }
+
+    /* ── MAIN CONTENT ── */
+    .main-content {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 2.5rem 2rem;
+    }
+
+    /* ── TAB PANELS ── */
+    .tab-panel { display: none; }
+    .tab-panel.active { display: block; }
+
+    /* ── TWO-COLUMN LAYOUT ── */
+    .two-col {
+      display: grid;
+      grid-template-columns: 1fr 320px;
+      gap: 2.5rem;
+      align-items: start;
+    }
+
+    /* ── SECTION HEADING ── */
+    .section-heading {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--near-black);
+      margin-bottom: 0.4rem;
+      line-height: 1.3;
+    }
+    .section-intro {
+      color: var(--dark-gray);
+      font-size: 0.95rem;
+      margin-bottom: 2rem;
+      max-width: 640px;
+      line-height: 1.65;
+    }
+
+    /* ── CONTENT BLOCKS ── */
+    .content-block {
+      background: white;
+      border-radius: 3px;
+      padding: 1.75rem 2rem;
+      margin-bottom: 1.25rem;
+      border-left: 3px solid var(--light-teal);
+      box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+    }
+    .content-block h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: var(--near-black);
+      margin-bottom: 0.5rem;
+    }
+    .content-block p {
+      font-size: 0.92rem;
+      color: var(--dark-charcoal);
+      line-height: 1.7;
+      margin-bottom: 0.5rem;
+    }
+    .content-block p:last-child { margin-bottom: 0; }
+    .content-block ul {
+      margin: 0.5rem 0 0.5rem 1.1rem;
+      font-size: 0.92rem;
+      color: var(--dark-charcoal);
+    }
+    .content-block ul li { margin-bottom: 0.3rem; }
+    .content-block.accent { border-left-color: var(--red); }
+    .content-block.teal-dark { border-left-color: var(--dark-teal); }
+
+    /* ── SIDEBAR BOXES ── */
+    .sidebar-box {
+      background: white;
+      border-radius: 3px;
+      padding: 1.5rem;
+      margin-bottom: 1.25rem;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+    }
+    .sidebar-box h4 {
+      font-family: 'Playfair Display', serif;
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: var(--near-black);
+      margin-bottom: 0.75rem;
+      padding-bottom: 0.5rem;
+      border-bottom: 2px solid var(--pale-blue-gray);
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      font-size: 0.78rem;
+    }
+    .sidebar-box p {
+      font-size: 0.88rem;
+      color: var(--dark-gray);
+      line-height: 1.6;
+      margin-bottom: 0.5rem;
+    }
+    .sidebar-box p:last-child { margin-bottom: 0; }
+    .contact-line {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.5rem;
+      font-size: 0.88rem;
+      color: var(--dark-charcoal);
+      margin-bottom: 0.4rem;
+    }
+    .contact-label {
+      font-weight: 600;
+      color: var(--dark-gray);
+      min-width: 60px;
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      padding-top: 0.1rem;
+    }
+    .contact-val a { color: var(--teal); text-decoration: none; }
+    .contact-val a:hover { text-decoration: underline; }
+
+    .hours-row {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.87rem;
+      padding: 0.3rem 0;
+      border-bottom: 1px solid var(--pale-blue-gray);
+      color: var(--dark-charcoal);
+    }
+    .hours-row:last-child { border-bottom: none; }
+    .hours-row .day { font-weight: 500; }
+    .hours-row .closed { color: var(--medium-gray); font-style: italic; }
+
+    .sidebar-box.highlight {
+      background: var(--near-black);
+    }
+    .sidebar-box.highlight h4 { color: var(--light-teal); border-bottom-color: rgba(255,255,255,0.1); }
+    .sidebar-box.highlight p { color: var(--light-gray); }
+    .sidebar-box.highlight a { color: var(--medium-teal); }
+
+    /* ── RESOURCE CARDS (Databases) ── */
+    .resource-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+      margin-bottom: 1.5rem;
+    }
+    .resource-card {
+      background: white;
+      border-radius: 3px;
+      padding: 1.25rem 1.5rem;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+      border-top: 3px solid var(--teal);
+      transition: box-shadow 0.2s, transform 0.2s;
+    }
+    .resource-card:hover {
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      transform: translateY(-1px);
+    }
+    .resource-card.sub { border-top-color: var(--dark-gray); }
+    .resource-card h4 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1rem;
+      font-weight: 600;
+      color: var(--near-black);
+      margin-bottom: 0.2rem;
+    }
+    .resource-card .resource-url {
+      font-size: 0.75rem;
+      color: var(--teal);
+      text-decoration: none;
+      display: block;
+      margin-bottom: 0.6rem;
+      word-break: break-all;
+    }
+    .resource-card.sub .resource-url { color: var(--dark-gray); }
+    .resource-card p {
+      font-size: 0.87rem;
+      color: var(--dark-charcoal);
+      line-height: 1.6;
+    }
+    .badge {
+      display: inline-block;
+      font-size: 0.65rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 0.15rem 0.45rem;
+      border-radius: 2px;
+      margin-bottom: 0.5rem;
+    }
+    .badge.free { background: #d4edda; color: #155724; }
+    .badge.sub { background: var(--pale-blue-gray); color: var(--dark-gray); }
+
+    /* ── SECTION DIVIDER ── */
+    .section-divider {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin: 2rem 0 1.5rem;
+    }
+    .section-divider h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: var(--near-black);
+      white-space: nowrap;
+    }
+    .section-divider::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: var(--pale-blue-gray);
+    }
+
+    /* ── TIPS ── */
+    .tip-block {
+      background: white;
+      border-radius: 3px;
+      padding: 1.5rem 1.75rem;
+      margin-bottom: 1rem;
+      display: grid;
+      grid-template-columns: 36px 1fr;
+      gap: 1rem;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+      align-items: start;
+    }
+    .tip-number {
+      width: 36px;
+      height: 36px;
+      background: var(--near-black);
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Playfair Display', serif;
+      font-weight: 700;
+      font-size: 0.95rem;
+      flex-shrink: 0;
+      border-radius: 2px;
+    }
+    .tip-content h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1rem;
+      font-weight: 600;
+      color: var(--near-black);
+      margin-bottom: 0.35rem;
+    }
+    .tip-content p {
+      font-size: 0.91rem;
+      color: var(--dark-charcoal);
+      line-height: 1.68;
+    }
+
+    /* ── FOOTER ── */
+    .site-footer {
+      background: var(--near-black);
+      color: var(--medium-gray);
+      text-align: center;
+      padding: 1.5rem 2rem;
+      font-size: 0.8rem;
+      margin-top: 3rem;
+      border-top: 3px solid var(--dark-charcoal);
+    }
+    .site-footer a { color: var(--light-teal); text-decoration: none; }
+    .site-footer a:hover { text-decoration: underline; }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 768px) {
+      .two-col { grid-template-columns: 1fr; }
+      .resource-grid { grid-template-columns: 1fr; }
+      .tab-btn { font-size: 0.78rem; padding: 0.65rem 0.9rem; }
+      .guide-hero { padding: 2rem 1.25rem 0; }
+      .main-content { padding: 2rem 1.25rem; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header class="site-header">
+  <div class="header-inner">
+    <a href="#" class="header-logo">
+      <div class="logo-mark">OPL</div>
+      <div class="logo-text">
+        <span class="logo-library">Opelika Public Library</span>
+        <span class="logo-city">Opelika, Alabama</span>
+      </div>
+    </a>
+    <a href="#" class="header-back">← All Research Guides</a>
+  </div>
+</header>
+
+<!-- GUIDE HERO + TAB NAV -->
+<div class="guide-hero">
+  <div class="hero-inner">
+    <div class="guide-label">Research Guide</div>
+    <h1 class="guide-title">Genealogy &amp; Local History Research</h1>
+    <p class="guide-subtitle">Resources, tools, and guidance for tracing your family history and exploring the story of Opelika and Lee County.</p>
+    <nav class="tab-nav" role="tablist">
+      <button class="tab-btn active" role="tab" aria-selected="true" onclick="switchTab('getting-started', this)">Getting Started</button>
+      <button class="tab-btn" role="tab" aria-selected="false" onclick="switchTab('research-tips', this)">Research Tips</button>
+      <button class="tab-btn" role="tab" aria-selected="false" onclick="switchTab('databases', this)">Databases &amp; Tools</button>
+    </nav>
+  </div>
+</div>
+
+<!-- MAIN -->
+<main class="main-content">
+
+  <!-- ── TAB: GETTING STARTED ── -->
+  <div id="getting-started" class="tab-panel active" role="tabpanel">
+    <div class="two-col">
+      <div class="primary-col">
+
+        <div class="content-block accent">
+          <h3>Where do I begin?</h3>
+          <p>Genealogy research can feel overwhelming at first, but starting simple is the right instinct. Before diving into databases, take a few minutes to write down what you already know: full names, approximate birth years, places of residence, and any family stories you've heard. The answers you already have will point you toward the questions worth asking next.</p>
+          <p>A good first question is always: <strong>what is the earliest generation I can document, and where did they live?</strong> Working backward from the present, one generation at a time, is almost always more productive than trying to leap directly to distant ancestors.</p>
+        </div>
+
+        <div class="content-block">
+          <h3>What to bring to your research visit</h3>
+          <ul>
+            <li>Names, dates, and places you already know — even approximate ones are useful</li>
+            <li>Any documents you have at home: birth certificates, obituaries, old photographs, letters, family bibles</li>
+            <li>A notebook or laptop for recording what you find and where you found it</li>
+            <li>Your library card (required for access to some databases)</li>
+          </ul>
+        </div>
+
+        <div class="content-block teal-dark">
+          <h3>A note on archival materials</h3>
+          <p>If your research leads you to original archival materials — manuscripts, photographs, historic documents — a few simple guidelines protect both you and the collection:</p>
+          <ul>
+            <li>Use <strong>pencil only</strong> at the research table (no pens or markers)</li>
+            <li>Handle photographs and fragile items with gloves, which the archivist will provide</li>
+            <li>No food or beverages in the reading room</li>
+            <li>Personal photography is welcome; flash is not</li>
+          </ul>
+          <p style="margin-top:0.75rem;">The archivist retrieves all materials — you won't need to navigate the stacks yourself. Just ask.</p>
+        </div>
+
+        <div class="content-block">
+          <h3>Not sure where to start? Ask us.</h3>
+          <p>The archivist is here to help you find what you're looking for — or figure out what to look for next. Don't hesitate to ask for a consultation, whether you're a first-time researcher or returning with a stubborn brick wall. Walk-ins are welcome during research hours, or contact us in advance to schedule an appointment.</p>
+        </div>
+
+      </div>
+
+      <aside class="sidebar-col">
+
+        <div class="sidebar-box">
+          <h4>Contact the Archivist</h4>
+          <div class="contact-line">
+            <span class="contact-label">Name</span>
+            <span class="contact-val">Murray Rice</span>
+          </div>
+          <div class="contact-line">
+            <span class="contact-label">Email</span>
+            <span class="contact-val"><a href="mailto:mrice@opelika-al.gov">mrice@opelika-al.gov</a></span>
+          </div>
+          <div class="contact-line">
+            <span class="contact-label">Phone</span>
+            <span class="contact-val">(334) 705-5387</span>
+          </div>
+          <div class="contact-line">
+            <span class="contact-label">Location</span>
+            <span class="contact-val">Genealogy Room, Opelika Public Library</span>
+          </div>
+        </div>
+
+        <div class="sidebar-box">
+          <h4>First Visit?</h4>
+          <p>All researchers complete a brief registration form on their first visit. This helps us understand how our collections are being used and allows us to follow up if questions arise after your visit.</p>
+        </div>
+
+      </aside>
+    </div>
+  </div>
+
+  <!-- ── TAB: RESEARCH TIPS ── -->
+  <div id="research-tips" class="tab-panel" role="tabpanel">
+    <p class="section-intro">Eight practical strategies for getting the most out of your genealogical research — whether you're just starting out or working through a persistent brick wall.</p>
+
+    <div class="tip-block">
+      <div class="tip-number">1</div>
+      <div class="tip-content">
+        <h3>Cast a wide net on spelling</h3>
+        <p>Names were recorded by ear, often by clerks who had never met your ancestor. The same person might appear as "Tompkins," "Thompkins," and "Tomkins" across different documents. When searching databases, try alternate spellings and use wildcard characters (usually an asterisk: <em>Thomp*</em>) when the platform allows it.</p>
+      </div>
+    </div>
+
+    <div class="tip-block">
+      <div class="tip-number">2</div>
+      <div class="tip-content">
+        <h3>Every source has a source</h3>
+        <p>When you find information in a published genealogy, a family tree on Ancestry, or a county history book, treat it as a lead, not a conclusion. Follow it back to the original record. The further a piece of information is from the original document, the more opportunities there have been for errors to creep in.</p>
+      </div>
+    </div>
+
+    <div class="tip-block">
+      <div class="tip-number">3</div>
+      <div class="tip-content">
+        <h3>Document everything — including dead ends</h3>
+        <p>Record not just what you find, but where you looked and came up empty. A note that says "searched Lee County deed books 1870–1890, no results for John Mercer" saves you from repeating that search six months from now and prevents you from chasing the same dead end twice.</p>
+      </div>
+    </div>
+
+    <div class="tip-block">
+      <div class="tip-number">4</div>
+      <div class="tip-content">
+        <h3>Primary sources vs. secondary sources</h3>
+        <p>A <em>primary source</em> was created at or near the time of the event by someone with direct knowledge — a birth certificate, a marriage license, a census record. A <em>secondary source</em> was created later, often from memory or other records — an obituary, a death certificate, a published family history. Both are useful; neither is infallible. Even primary sources contain errors.</p>
+      </div>
+    </div>
+
+    <div class="tip-block">
+      <div class="tip-number">5</div>
+      <div class="tip-content">
+        <h3>The census is a starting point, not an endpoint</h3>
+        <p>Federal census records (available through 1950) are often a researcher's first stop, and for good reason — they can place a family in a specific location at a specific time. But ages are frequently approximated, names are misspelled, and birthplaces are vague. Use the census to orient yourself, then look for records that can confirm or correct what it tells you.</p>
+      </div>
+    </div>
+
+    <div class="tip-block">
+      <div class="tip-number">6</div>
+      <div class="tip-content">
+        <h3>Work with what the record was created to do</h3>
+        <p>Every record was created for a specific administrative purpose, not for your research. A death certificate was created to document a death — the informant may not have known the deceased's exact birthdate or parents' names. Understanding why a record was created helps you evaluate how reliable it's likely to be for any given piece of information.</p>
+      </div>
+    </div>
+
+    <div class="tip-block">
+      <div class="tip-number">7</div>
+      <div class="tip-content">
+        <h3>When you hit a brick wall, change the question</h3>
+        <p>If you can't find a person, try finding their neighbors, siblings, or community. People in the same county often appear in each other's records — as witnesses on deeds, bondsmen on marriage licenses, or fellow church members. Cluster research — studying the people around your ancestor — frequently breaks open cases that direct searches cannot.</p>
+      </div>
+    </div>
+
+    <div class="tip-block">
+      <div class="tip-number">8</div>
+      <div class="tip-content">
+        <h3>Cite as you go</h3>
+        <p>It is much easier to record where you found something when you find it than to reconstruct that information later. A minimal citation — database name, collection title, record type, and the date you accessed it — is enough to let you or someone else find the record again.</p>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ── TAB: DATABASES ── -->
+  <div id="databases" class="tab-panel" role="tabpanel">
+
+    <div class="section-divider"><h2>Free Resources</h2></div>
+
+    <div class="resource-grid">
+      <div class="resource-card">
+        <span class="badge free">Free</span>
+        <h4>FamilySearch</h4>
+        <a href="https://www.familysearch.org" class="resource-url" target="_blank">familysearch.org</a>
+        <p>The largest free genealogy database in the world, maintained by the Church of Jesus Christ of Latter-day Saints. Includes billions of digitized records — census, vital records, military, probate, and more — spanning hundreds of countries and centuries. An excellent first stop for any research project.</p>
+      </div>
+      <div class="resource-card">
+        <span class="badge free">Free</span>
+        <h4>Chronicling America</h4>
+        <a href="https://chroniclingamerica.loc.gov" class="resource-url" target="_blank">chroniclingamerica.loc.gov</a>
+        <p>A searchable database of historic American newspapers from 1770–1963, developed by the Library of Congress and NEH. Includes several Alabama newspapers. Obituaries, marriage announcements, and local news items can break open genealogical brick walls.</p>
+      </div>
+      <div class="resource-card">
+        <span class="badge free">Free</span>
+        <h4>Find A Grave</h4>
+        <a href="https://www.findagrave.com" class="resource-url" target="_blank">findagrave.com</a>
+        <p>A crowdsourced database of cemetery records and memorial pages, with photographs of headstones from cemeteries worldwide. Particularly useful for confirming death dates, locating burial sites, and identifying family clusters. Coverage of rural Alabama cemeteries is substantial and growing.</p>
+      </div>
+      <div class="resource-card">
+        <span class="badge free">Free</span>
+        <h4>BillionGraves</h4>
+        <a href="https://www.billiongraves.com" class="resource-url" target="_blank">billiongraves.com</a>
+        <p>A GPS-tagged headstone photograph database similar to Find A Grave, with an emphasis on indexed, searchable records. The two databases have different coverage — searching both is worth the effort.</p>
+      </div>
+      <div class="resource-card">
+        <span class="badge free">Free</span>
+        <h4>USGenWeb Project</h4>
+        <a href="https://usgenweb.org" class="resource-url" target="_blank">usgenweb.org</a>
+        <p>A volunteer-driven network of free genealogical resources organized by state and county. The Alabama GenWeb project links to transcribed records, local histories, and researcher resources organized by county, including Lee County.</p>
+      </div>
+      <div class="resource-card">
+        <span class="badge free">Free</span>
+        <h4>Freedmen's Bureau Records</h4>
+        <a href="https://www.familysearch.org/en/freedmensbureau" class="resource-url" target="_blank">familysearch.org/en/freedmensbureau</a>
+        <p>Digitized and indexed records from the Bureau of Refugees, Freedmen, and Abandoned Lands (1865–1872). An essential resource for African American genealogy research in the post-Civil War South. Records include labor contracts, marriage registers, and ration records.</p>
+      </div>
+    </div>
+
+    <div class="section-divider"><h2>Subscription Resources</h2></div>
+
+    <div class="content-block" style="margin-bottom:1.25rem; border-left-color: var(--medium-gray);">
+      <p style="font-size:0.88rem; color: var(--dark-gray);">The following databases require a paid subscription. Alabama residents may be able to access some of these through the <strong>Alabama Virtual Library (AVL)</strong> — check <a href="https://www.avl.lib.al.us" target="_blank" style="color:var(--teal);">avl.lib.al.us</a> or ask a librarian. Some databases may also be available on library computers.</p>
+    </div>
+
+    <div class="resource-grid">
+      <div class="resource-card sub">
+        <span class="badge sub">Subscription</span>
+        <h4>Ancestry</h4>
+        <a href="https://www.ancestry.com" class="resource-url" target="_blank">ancestry.com</a>
+        <p>The largest subscription genealogy platform, with extensive U.S. and international records including census, vital records, military, immigration, and newspapers. Also hosts user-submitted family trees — treat these as leads rather than verified sources.</p>
+      </div>
+      <div class="resource-card sub">
+        <span class="badge sub">Subscription</span>
+        <h4>Newspapers.com</h4>
+        <a href="https://www.newspapers.com" class="resource-url" target="_blank">newspapers.com</a>
+        <p>A large archive of digitized historical newspapers, including many Alabama titles. Particularly strong for obituaries, marriage and birth announcements, and local news. Owned by Ancestry; some access is included with Ancestry subscriptions.</p>
+      </div>
+      <div class="resource-card sub">
+        <span class="badge sub">Subscription</span>
+        <h4>Fold3</h4>
+        <a href="https://www.fold3.com" class="resource-url" target="_blank">fold3.com</a>
+        <p>Specializes in military records — pension files, draft registrations, service records, and unit histories from the Revolutionary War through the twentieth century. An essential resource for any research involving military service.</p>
+      </div>
+      <div class="resource-card sub">
+        <span class="badge sub">Subscription</span>
+        <h4>MyHeritage</h4>
+        <a href="https://www.myheritage.com" class="resource-url" target="_blank">myheritage.com</a>
+        <p>A genealogy platform with strong international holdings, particularly useful for European research. Also offers DNA testing services and a photo enhancement tool that can help identify individuals in old photographs.</p>
+      </div>
+      <div class="resource-card sub">
+        <span class="badge sub">Subscription</span>
+        <h4>FindMyPast</h4>
+        <a href="https://www.findmypast.com" class="resource-url" target="_blank">findmypast.com</a>
+        <p>Particularly strong in British Isles records, but also holds U.S. collections including historical newspapers and census records. Useful for researchers with Irish, English, Scottish, or Welsh ancestry.</p>
+      </div>
+    </div>
+
+    <div class="content-block" style="border-left-color: var(--teal); margin-top: 0.5rem;">
+      <p style="font-size:0.9rem;">Don't see what you need? <strong>Ask the archivist</strong> — access to genealogical records is constantly expanding, and there may be resources available that aren't listed here. Contact <a href="mailto:mrice@opelika-al.gov" style="color:var(--teal);">mrice@opelika-al.gov</a> with questions.</p>
+    </div>
+
+  </div>
+
+</main>
+
+<!-- FOOTER -->
+<footer class="site-footer">
+  <p>Opelika Public Library Archive &nbsp;·&nbsp; <a href="mailto:mrice@opelika-al.gov">mrice@opelika-al.gov</a> &nbsp;·&nbsp; A program of the Opelika Public Library, supported by the City of Opelika.</p>
+</footer>
+
+<script>
+  function switchTab(tabId, btn) {
+    document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+    document.querySelectorAll('.tab-btn').forEach(b => {
+      b.classList.remove('active');
+      b.setAttribute('aria-selected', 'false');
+    });
+    document.getElementById(tabId).classList.add('active');
+    btn.classList.add('active');
+    btn.setAttribute('aria-selected', 'true');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+</script>
+
+</body>
+</html>
